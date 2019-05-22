@@ -1,22 +1,18 @@
 package repository
 
 import (
-	"context"
 	"testing"
+
+	"github.com/arif-dyned/sample-code/domain"
 )
 
-func (r *fiboRepository) TestFibonacci(t *testing.T) {
-	data := []struct {
-		n int
-	}{
-		{0}, {1}, {2}, {3}, {4}, {5}, {6}, {10}, {42},
+func (r *sumRepository) TestSum(t *testing.T) {
+	data := domain.Num{}
+	data.Num1 = 1
+	data.Num2 = 2
+
+	if _, err := r.Index(data); err != nil {
+		t.Errorf("Invalid Sum value")
 	}
 
-	ctx := context.Background()
-
-	for _, d := range data {
-		if got, err := r.Index(ctx, d.n); err != nil {
-			t.Errorf("Invalid Fibonacci value for N: %d, got: %d, want: %d", d.n, got, err)
-		}
-	}
 }
