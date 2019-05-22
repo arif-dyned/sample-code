@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/arif-dyned/sample-code/app/provider"
+	"github.com/arif-dyned/sample-code/app/services"
 	"github.com/gorilla/mux"
 )
 
@@ -22,6 +23,8 @@ func main() {
 
 	// Router
 	r := mux.NewRouter()
+	mux.CORSMethodMiddleware(r)
+	r.Use(services.CORSMiddleWare)
 
 	//Index Page
 	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
@@ -29,8 +32,11 @@ func main() {
 		w.Write([]byte("Welcome!"))
 	})
 
+	// Sum Handler
+	provider.RegisterSumService(r, wait)
+
 	// Fibo Handler
-	provider.RegisterFiboService(r)
+	provider.RegisterFiboService(r, wait)
 
 	// HTTP Server
 	srv := &http.Server{
