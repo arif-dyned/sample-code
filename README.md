@@ -23,9 +23,12 @@ Input : 4
 Output : 0, 1, 1, 2 
 
 ## Requirements
-1. go version go1.10 or above
-
+- [go] version go1.10 or above (https://golang.org/)
+- [Mux] (https://github.com/gorilla/mux)
 ## Usage
 To try it out, use:
 
-      % go run example/main.go
+      % go run app/main.go
+      or
+      % make 
+      % ./sample-code-server
